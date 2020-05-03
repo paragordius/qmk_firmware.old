@@ -21,6 +21,37 @@ enum custom_keycodes {
 #define RAS_OS  OSM(_RAISE)
 #define ONESHOT_TAP_TOGGLE 2
 
+// Unicode map as seen here : https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#unicode-map
+enum unicode_names {
+  CHCK,
+  CROS,
+  DAGG,
+  DDAG,
+  IPCT,
+  BULL,
+  FING,
+  REFR,
+  ELIP,
+  INBG,
+  ENDA,
+  EMDA
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+  [CHCK] = 0x2713, // ✓
+  [CROS] = 0x2717, // ✗
+  [DAGG] = 0x2020, // †
+  [DDAG] = 0x2021, // ‡
+  [IPCT] = 0x00B7, // ·
+  [BULL] = 0x2022, // •
+  [FING] = 0x261E, // ☞
+  [REFR] = 0x203B, // ※
+  [ELIP] = 0x2026, // …
+  [INBG] = 0x203D, // ‽
+  [ENDA] = 0x2013, // –
+  [EMDA] = 0x2014, // —
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
@@ -44,17 +75,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Esc  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Del  |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |   ~  |      |      |      |      |      |      |   -  |   =  |   {  |   }  |  |   |
+ * |   ~  |   ✓  |   †  |   ·  |   ☞  |   …  |   –  |   -  |   =  |   {  |   }  |  |   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |   _  |   +  |   [  |   ]  |      |
+ * |      |   ✗  |   ‡  |   •  |   ※  |   ‽  |   —  |   _  |   +  |   [  |   ]  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = LAYOUT_ortho_4x12( \
   KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL, \
-  KC_TILD, _______, _______, _______, _______, _______, _______, KC_MINUS,KC_EQL,  KC_LCBR, KC_LCBR, KC_PIPE, \
-  _______, _______, _______, _______, _______, _______, _______, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______, \
+  KC_TILD, X(CHCK), X(DAGG), X(IPCT), X(FING), X(ELIP), X(ENDA), KC_MINUS,KC_EQL,  KC_LCBR, KC_LCBR, KC_PIPE, \
+  _______, X(CROS), X(DDAG), X(BULL), X(REFR), X(INBG), X(EMDA), KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
 
