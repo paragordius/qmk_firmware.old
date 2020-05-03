@@ -22,6 +22,7 @@ enum custom_keycodes {
 #define ONESHOT_TAP_TOGGLE 2
 
 // Unicode map as seen here : https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#unicode-map
+// Note: `UNICODEMAP_ENABLE = yes` needs to be in your `rules.mk` file!
 enum unicode_names {
   CHCK,
   CROS,
