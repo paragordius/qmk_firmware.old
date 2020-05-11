@@ -37,3 +37,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // fucking Qwiic Pro Micro
 #define SPLIT_USB_DETECT
+
+#define ONESHOT_TAP_TOGGLE 2
+#define TAPPING_TOGGLE 2
