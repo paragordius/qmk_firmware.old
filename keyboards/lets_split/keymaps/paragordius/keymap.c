@@ -39,7 +39,33 @@ enum unicode_names {
   ELIP,
   INBG,
   ENDA,
-  EMDA
+  EMDA,
+  SM_A,
+  SM_B,
+  SM_C,
+  SM_D,
+  SM_E,
+  SM_F,
+  SM_G,
+  SM_H,
+  SM_I,
+  SM_J,
+  SM_K,
+  SM_L,
+  SM_M,
+  SM_N,
+  SM_O,
+  SM_P,
+  SM_Q,
+  SM_R,
+  SM_S,
+  SM_T,
+  SM_U,
+  SM_V,
+  SM_W,
+  SM_X,
+  SM_Y,
+  SM_Z
 };
 
 const uint32_t PROGMEM unicode_map[] = {
@@ -55,6 +81,32 @@ const uint32_t PROGMEM unicode_map[] = {
   [INBG] = 0x203D, // ‽
   [ENDA] = 0x2013, // –
   [EMDA] = 0x2014, // —
+  [SM_A] = 0x1D43, // ᵃ
+  [SM_B] = 0x1D47, // ᵇ
+  [SM_C] = 0x1D9C, // ᶜ
+  [SM_D] = 0x1D48, // ᵈ
+  [SM_E] = 0x1D49, // ᵉ
+  [SM_F] = 0x1DA0, // ᶠ
+  [SM_G] = 0x1D4D, // ᵍ
+  [SM_H] = 0x02B0, // ʰ
+  [SM_I] = 0x1DA6, // ᶦ
+  [SM_J] = 0x02B2, // ʲ
+  [SM_K] = 0x1D4F, // ᵏ
+  [SM_L] = 0x02E1, // ˡ
+  [SM_M] = 0x1D50, // ᵐ
+  [SM_N] = 0x207F, // ⁿ
+  [SM_O] = 0x1D52, // ᵒ
+  [SM_P] = 0x1D56, // ᵖ
+  [SM_Q] = 0x1D60, // ᵠ
+  [SM_R] = 0x02B3, // ʳ
+  [SM_S] = 0x02E2, // ˢ
+  [SM_T] = 0x1D57, // ᵗ
+  [SM_U] = 0x1D58, // ᵘ
+  [SM_V] = 0x1D5B, // ᵛ
+  [SM_W] = 0x02B7, // ʷ
+  [SM_X] = 0x02E3, // ˣ
+  [SM_Y] = 0x02B8, // ʸ
+  [SM_Z] = 0x1DBB, // ᶻ
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
