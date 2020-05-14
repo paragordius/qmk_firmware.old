@@ -5,16 +5,24 @@
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER 1
-#define _RAISE 2
+#define _LOWER  1
+#define _RAISE  2
+#define _STICKY 3
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
 };
 
-/* Main `LOWER` and `RAISE` buttons are one-shot */
-#define LOWER OSL(_LOWER)
-#define RAISE OSL(_RAISE)
+/* Main `LOWER`, `RAISE` and `STICKY` buttons are one-shot */
+#define LOWER  OSL(_LOWER)
+#define RAISE  OSL(_RAISE)
+#define STICKY OSL(_STICKY)
+
+/* Keycodes for our `STICKY` layer of modifiers */
+#define S_LCTL OSM(MOD_LCTL)
+#define S_LSFT OSM(MOD_LSFT)
+#define S_LGUI OSM(MOD_LGUI)
+#define S_LALT OSM(MOD_LALT)
 
 // Unicode map as seen here : https://beta.docs.qmk.fm/using-qmk/software-features/feature_unicode#unicode-map
 // Note: `UNICODEMAP_ENABLE = yes` needs to be in your `rules.mk` file!
@@ -57,14 +65,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
  | Shift  |   Z    |   X    |   C    |   V    |   B    |  |   N    |   M    |   ,    |   .    |   /    | Enter  |
  |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
- | Raise  | Pause  | Alt    | GUI    | Lower  | Space  |  | Space  | Raise  | Home   | PgDn   | PgUp   | End    |
+ | Raise  | Sticky | Alt    | GUI    | Lower  | Space  |  | Space  | Raise  | Home   | PgDn   | PgUp   | End    |
  `-----------------------------------------------------'  `-----------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_ortho_4x12(
   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
   KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-  RAISE,   KC_PAUSE,KC_LALT, KC_LGUI, LOWER,   KC_SPC,     KC_SPC,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
+  RAISE,   STICKY,  KC_LALT, KC_LGUI, LOWER,   KC_SPC,     KC_SPC,  RAISE,   KC_HOME, KC_PGDN, KC_PGUP, KC_END
 ),
 
 /* Lower
@@ -101,6 +109,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,UC_M_LN, KC_BSLS,
   _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,     KC_F11,  KC_F12,  _______, _______, UC_M_MA, _______,
   _______, _______, _______, _______, _______, _______,    _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+),
+
+/* Sticky
+ ,-----------------------------------------------------.  ,-----------------------------------------------------.
+ |        |        |        |        |        |        |  |        |        |        |        |        |        |
+ |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+ | S Ctl  |        |        |        |        |        |  |        |        |        |        |        |        |
+ |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+ | S Shft |        |        |        |        |        |  |        |        |        |        |        |        |
+ |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
+ |        |        | S Alt  |        |        |        |  |        |        |        |        |        |        |
+ `-----------------------------------------------------'  `-----------------------------------------------------'
+ */
+
+[_STICKY] = LAYOUT_ortho_4x12(
+  _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
+  S_LCTL,  _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
+  S_LSFT,  _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
+  _______, _______, S_LALT,  _______, _______, _______,    _______, _______, _______, _______, _______, _______
 ),
 
 };
