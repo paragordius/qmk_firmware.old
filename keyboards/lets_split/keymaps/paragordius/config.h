@@ -40,3 +40,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ONESHOT_TAP_TOGGLE 2
 #define TAPPING_TOGGLE 2
+
+#define C6_AUDIO
+#define AUDIO_CLICKY
+#define AUDIO_CLICKY_FREQ_RANDOMNESS 1.0f
+
+#ifdef AUDIO_ENABLE
+//  #define STARTUP_SONG SONG(NO_SOUND)
+  #define STARTUP_SONG SONG(TO_BOLDLY_GO_1)
+#endif
+
+#define TO_BOLDLY_GO_1 \
+  W__NOTE(_BF3 ), \
+  Q__NOTE(_EF4 ), \
+  WD_NOTE(_AF4 ), \
+  W__NOTE(_REST), \
+  H__NOTE(_G4  ), \
+  Q__NOTE(_EF4 ), \
+  H__NOTE(_C4  ), \
+  W__NOTE(_REST), \
+  QD_NOTE(_F4  ), \
+  M__NOTE(_BF4, 128),

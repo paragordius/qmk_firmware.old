@@ -102,14 +102,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  |--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
  |        |   ✗    |   ‡    |   •    |   ※    |   ‽    |  |   —    |   _    |   +    |   [    |   ]    |        |
  |--------+--------+--------+--------+-----  -+--------|  |--------+--------+--------+--------+--------+--------|
- |        |        |        |        |        |        |  |        |        | Next   | Vol-   | Vol+   | Play   |
+ |        |        |        |        |        |        |  |        |        | Audio  | Click  | Mu Tog | Mu Mod |
  `-----------------------------------------------------'  `-----------------------------------------------------'
  */
 [_LOWER] = LAYOUT_ortho_4x12(
   KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,    KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
   KC_TILD, X(CHCK), X(DAGG), X(IPCT), X(FING), X(ELIP),    X(ENDA), KC_MINUS,KC_EQL,  KC_LCBR, KC_RCBR, KC_PIPE,
   _______, X(CROS), X(DDAG), X(BULL), X(REFR), X(INBG),    X(EMDA), KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, _______,
-  _______, _______, _______, _______, _______, _______,    _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY
+  _______, _______, _______, _______, _______, _______,    _______, _______, AU_TOG,  CK_TOGG, MU_TOG,  MU_MOD
 ),
 
 /* Raise
