@@ -12,8 +12,6 @@ extern uint8_t is_master;
 #define _RAISE  2
 #define _STICKY 3
 
-// TODO: Figure out WTF is up with OSL RAISE/LOWER
-
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
 };
@@ -184,8 +182,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     set_keylog(keycode, record);
 #endif
     // set_timelog();
-    if (IS_LAYER_ON(_LOWER) && IS_LAYER_ON(_RAISE)) {
-      if (IS_LAYER_ON(_STICKY)) {
+    if (layer_state_is(_LOWER) && layer_state_is(_RAISE)) {
+      if (layer_state_is(_STICKY)) {
         layer_clear();
       }  else {
         layer_move(_STICKY);
