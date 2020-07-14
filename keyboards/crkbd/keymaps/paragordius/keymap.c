@@ -8,9 +8,9 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 #define _QWERTY 0
-#define _LOWER  1
-#define _RAISE  2
-#define _STICKY 3
+#define _STICKY 1
+#define _LOWER  2
+#define _RAISE  3
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -72,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_ENT, \
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   LOWER,  KC_SPC,     KC_SPC,   RAISE,  STICKY \
+                                          KC_LGUI,   LOWER,  KC_SPC,     KC_SPC,   RAISE, KC_LALT \
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        S_LSFT, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           S_LGUI, _______, _______,    _______, _______, _______ \
+                                           S_LGUI, _______, _______,    _______, _______,  S_LALT \
                                       //`--------------------------'  `--------------------------'
   ),
 
