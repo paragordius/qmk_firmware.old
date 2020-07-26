@@ -184,6 +184,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // set_timelog();
     if (layer_state_is(_LOWER) && layer_state_is(_RAISE)) {
       if (layer_state_is(_STICKY)) {
+        // Taken from here https://www.reddit.com/r/olkb/comments/d8jhx8/qmk_clearing_locked_oneshot_mods/
+        // We're basically doubling up here and clearing any active oneshot mods.
+        uint8_t mods = 0;
+        if ((mods = get_oneshot_mods()) && !has_oneshot_mods_timed_out()) {
+            clear_oneshot_mods();
+            unregister_mods(mods);
+        }
+        if ((mods = get_oneshot_locked_mods())) {
+            clear_oneshot_locked_mods();
+            unregister_mods(mods);
+        }
+        // And finally we're clearing any active layers (including _STICKY).
         layer_clear();
       }  else {
         layer_move(_STICKY);
