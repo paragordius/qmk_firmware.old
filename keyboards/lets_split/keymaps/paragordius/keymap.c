@@ -13,12 +13,13 @@ enum custom_keycodes {
   QWERTY = SAFE_RANGE,
 };
 
-/* Main `LOWER` and `RAISE` buttons are one-shot */
-#define LOWER  OSL(_LOWER)
-#define RAISE  OSL(_RAISE)
+#define LOWER  MO(_LOWER)
+#define RAISE  MO(_RAISE)
 #define STICKY TG(_STICKY)
 
 /* Keycodes for our `STICKY` layer of modifiers */
+#define S_LWR  OSL(_LOWER)
+#define S_RSE  OSL(_RAISE)
 #define S_LCTL OSM(MOD_LCTL)
 #define S_LSFT OSM(MOD_LSFT)
 #define S_LGUI OSM(MOD_LGUI)
@@ -91,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
   S_LCTL,  _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
   S_LSFT,  _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______,
-  _______, _______, S_LALT,  S_LGUI,  _______, _______,    _______, _______, _______, _______, _______, _______
+  _______, _______, S_LALT,  S_LGUI,  S_LWR,   _______,    _______, S_RSE,   _______, _______, _______, _______
 ),
 /* Lower
  ,-----------------------------------------------------.  ,-----------------------------------------------------.
