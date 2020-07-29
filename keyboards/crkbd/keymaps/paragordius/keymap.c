@@ -17,8 +17,10 @@ enum custom_keycodes {
 };
 
 /* Main `LOWER` and `RAISE` buttons are one-shot */
-#define LOWER  OSL(_LOWER)
-#define RAISE  OSL(_RAISE)
+#define LOWER  MO(_LOWER)
+#define RAISE  MO(_RAISE)
+#define S_LWR  OSL(_LOWER)
+#define S_RSE  OSL(_RAISE)
 #define STICKY TG(_STICKY)
 
 /* Keycodes for our `STICKY` layer of modifiers */
@@ -85,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        S_LSFT, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                           S_LGUI, _______, _______,    _______, _______,  S_LALT \
+                                           S_LGUI, S_LWR,   _______,    _______,   S_RSE,  S_LALT \
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -95,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
        KC_GRV,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, UC_M_LN, KC_BSLS,\
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                       KC_F11,  KC_F12, _______, _______, UC_M_MA, _______,\
+      _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,                       KC_F11,  KC_F12,  STICKY,KC_CLEAR, UC_M_MA, _______,\
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______ \
                                       //`--------------------------'  `--------------------------'
@@ -182,25 +184,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     set_keylog(keycode, record);
 #endif
     // set_timelog();
-    if (layer_state_is(_LOWER) && layer_state_is(_RAISE)) {
-      if (layer_state_is(_STICKY)) {
-        // Taken from here https://www.reddit.com/r/olkb/comments/d8jhx8/qmk_clearing_locked_oneshot_mods/
-        // We're basically doubling up here and clearing any active oneshot mods.
-        uint8_t mods = 0;
-        if ((mods = get_oneshot_mods()) && !has_oneshot_mods_timed_out()) {
-            clear_oneshot_mods();
-            unregister_mods(mods);
-        }
-        if ((mods = get_oneshot_locked_mods())) {
-            clear_oneshot_locked_mods();
-            unregister_mods(mods);
-        }
-        // And finally we're clearing any active layers (including _STICKY).
-        layer_clear();
-      }  else {
-        layer_move(_STICKY);
+    // Taken from here https://www.reddit.com/r/olkb/comments/d8jhx8/qmk_clearing_locked_oneshot_mods/
+    if (keycode == KC_CLEAR && record->event.pressed) {
+      bool rc = true;
+      uint8_t mods = 0;
+      if ((mods = get_oneshot_mods()) && !has_oneshot_mods_timed_out()) {
+        clear_oneshot_mods();
+        unregister_mods(mods);
+        rc = false;
       }
+      if ((mods = get_oneshot_locked_mods())) {
+        clear_oneshot_locked_mods();
+        unregister_mods(mods);
+        rc = false;
+      }
+      if (is_oneshot_layer_active()) {
+        layer_clear();
+        rc = false;
+      }
+      return rc;
     }
+    return true;
   }
   return true;
 }
