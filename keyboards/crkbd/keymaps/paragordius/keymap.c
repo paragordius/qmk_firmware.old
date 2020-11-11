@@ -139,6 +139,44 @@ const char *read_logo(void);
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 const char *read_keylog(void);
 const char *read_keylogs(void);
+const char *read_timelog(void);
+
+char mods_str[21] = {};
+
+const char *oneshot_mods_status(uint8_t mods, uint8_t locked_mods) {
+  char ctrl_status = ' ';
+  char shft_status = ' ';
+  char lgui_status = ' ';
+  char lalt_status = ' ';
+  // If there are active mods, denote them with lowercase
+  if (mods & MOD_MASK_CTRL) {
+    ctrl_status = 'c';
+  }
+  if (mods & MOD_MASK_SHIFT) {
+    shft_status = 's';
+  }
+  if (mods & MOD_MASK_GUI) {
+    lgui_status = 'g';
+  }
+  if (mods & MOD_MASK_ALT) {
+    lalt_status = 'a';
+  }
+  // And if there are active locked mods, denote those with uppercase
+  if (locked_mods & MOD_MASK_CTRL) {
+    ctrl_status = 'C';
+  }
+  if (locked_mods & MOD_MASK_SHIFT) {
+    shft_status = 'S';
+  }
+  if (locked_mods & MOD_MASK_GUI) {
+    lgui_status = 'G';
+  }
+  if (locked_mods & MOD_MASK_ALT) {
+    lalt_status = 'A';
+  }
+  snprintf(mods_str, sizeof(mods_str), "Mods:[%c] [%c] [%c] [%c]", ctrl_status, shft_status, lgui_status, lalt_status);
+  return mods_str;
+}
 
 // const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
@@ -154,6 +192,7 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     // If you want to change the display of OLED, you need to change here
     matrix_write_ln(matrix, read_layer_state());
     matrix_write_ln(matrix, read_keylog());
+    matrix_write_ln(matrix, oneshot_mods_status(get_oneshot_mods(), get_oneshot_locked_mods()));
     //matrix_write_ln(matrix, read_keylogs());
     //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     //matrix_write_ln(matrix, read_host_led_state());
