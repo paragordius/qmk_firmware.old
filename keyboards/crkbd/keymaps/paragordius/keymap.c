@@ -195,6 +195,7 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     // If you want to change the display of OLED, you need to change here
     matrix_write_ln(matrix, read_layer_state());
     matrix_write_ln(matrix, read_keylog());
+    // This is what is writing the sticky keys status line
     matrix_write_ln(matrix, oneshot_mods_status(get_oneshot_mods(), get_oneshot_locked_mods()));
     //matrix_write_ln(matrix, read_keylogs());
     //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
