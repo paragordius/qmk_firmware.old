@@ -18,45 +18,7 @@
 
 #pragma once
 
-#include "config_common.h"
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID 0x5043
-#define PRODUCT_ID 0x5442
-#define DEVICE_VER 0x0001
-#define MANUFACTURER PloopyCo
-#define PRODUCT Trackball
-
-/* key matrix size */
-#define MATRIX_ROWS 1
-#define MATRIX_COLS 5
-
-
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
-
-/* define if matrix has ghost (lacks anti-ghosting diodes) */
-//#define MATRIX_HAS_GHOST
-
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-
-/* Much more so than a keyboard, speed matters for a mouse. So we'll go for as high
-   a polling rate as possible. */
-#define USB_POLLING_INTERVAL_MS 1
-#define USB_MAX_POWER_CONSUMPTION 100
-
-/* Bootmagic Lite key configuration */
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 3
-
-#define ROTATIONAL_TRANSFORM_ANGLE 20
-
-// If board has a debug LED, you can enable it by defining this
-// #define DEBUG_LED_PIN F7
-#define PLOOPY_DPI_OPTIONS { 800 }
-#define PLOOPY_DPI_DEFAULT 0
+#define PLOOPY_DPI_OPTIONS { 400, 600, 800, 1000, 1200 }
+#define PLOOPY_DPI_DEFAULT 2
