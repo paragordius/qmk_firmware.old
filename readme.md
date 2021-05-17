@@ -1,3 +1,5 @@
+# Don't do what I did and work on `master` for an active fork…
+
 # Quantum Mechanical Keyboard Firmware
 
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
